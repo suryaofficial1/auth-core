@@ -1,0 +1,24 @@
+
+import bodyParser from "body-parser";
+import cors from "cors";
+import express from "express";
+import router from './Routes/AuthRouters.js';
+import productRouter from "./Routes/ProductRouters.js";
+import dotenv from 'dotenv';
+dotenv.config();
+
+const app = express();
+app.use(bodyParser.json());
+app.use(cors())
+
+const PORT = process.env.PORT || 8080;
+
+
+app.use('/auth', router),
+app.use('/products', productRouter)
+
+app.get('/helth-check', (req, res) =>{res.send("Helth check done")})
+
+app.listen(PORT, () =>{
+    console.log("Server is runing is port", PORT)
+})
